@@ -6,10 +6,11 @@ set utcak;
 set BenneLakik{utcak} within gyerekek;
 
 var megkapja{gyerekek,jatekok} binary;
+var ottlakik{gyerekek} binary; # minden gyerekre megnézi hogy adott utcában lakik e (1) vagy nem (0)
+
 
 s.t. mindenki1ajandekot {g in gyerekek}:
 	sum{j in jatekok} megkapja[g,j] = 1;
-
 
 s.t. max3anKaphatnakUgyanazt {j in jatekok}:
 	sum {g in gyerekek} megkapja[g,j] <=3;
@@ -17,9 +18,12 @@ s.t. max3anKaphatnakUgyanazt {j in jatekok}:
 s.t. kivansagfigelo {g in gyerekek, j in jatekok : kivansag[g,j] <> 1}:
 	megkapja[g,j] = 0;
 
-s.t. utcabelisegetfigyelo {u in utcak, j in jatekok, b in BenneLakik[u]}:
-	 sum {g in gyerekek} megkapja[g,j] <=1;
-
+s.t. utcabelisegetfigyelo {u in utcak, j in jatekok }: 
+	 sum {g in gyerekek, b in BenneLakik[u]} ottlakik[b] * megkapja[g,j] > 0;
+#   1	1	1
+#   1	0	0
+#   0	1	0
+#   0	0	0
 
 minimize koltseg :
 	sum {g in gyerekek, j in jatekok} (megkapja[g,j] * jatekar[j]);
@@ -86,16 +90,11 @@ Marika 		1		0			0		0		0			0
 
 set utcak := Petofi Ady Fo Beke Szabadsag;
 
-set BenneLakik := 
-	(Petofi) 		(Peti,Evi,Aladar)
-	(Ady) 			(Janka,Dani)
-	(Fo) 			(Juliska,Rozi,Adam,Zoli)
-	(Beke) 			(Tamas, Balint, Krisztian)
-	(Szabadsag)		(Karolina, Marika, Piroska)
-	
-;
-
-
+set BenneLakik[Petofi] := Peti Evi;
+set BenneLakik[Ady] := Piroska Juliska Rozi Janka;
+set BenneLakik[Fo] := Adam Zoli;
+set BenneLakik[Beke] := Aladar Tamas Krisztian Karolina;
+set BenneLakik[Szabadsag] := Dani Balint Marika;
 
 
 # A feladat a Mikulás gyárához készül. Minden gyerek kap egy ajándékot a Mikulástól.
