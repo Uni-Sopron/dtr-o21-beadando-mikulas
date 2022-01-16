@@ -46,51 +46,9 @@ for {(g1,g2) in utcabeliek}:
 printf "\n\n";
 printf "\n\n";
 
-data;
-
-set gyerekek := Peti Evi Piroska Juliska Adam Rozi Janka Aladar Dani Zoli Tamas Balint Krisztian Karolina Marika;
 
 
-set jatekok := baba kisauto yoyo maci bicikli puzzle;
 
-
-param jatekar := 
-baba  1200
-kisauto 1300
-yoyo 500
-maci 700
-bicikli 1500
-puzzle 1000
-;
-
-param kivansag :
-
-			baba 	kisauto 	yoyo 	maci 	bicikli		puzzle:=
-Peti 		0		1			1		1		0			0
-Evi 		1		0			0		1		1			1
-Piroska 	1		0			0		1		1			1
-Juliska 	1		0			1		1		1			0
-Adam 		0		1			0		0		1			1
-Rozi 		1		0			1		1		1			0
-Janka 		1		0			1		0		0			0
-Aladar 		0		1			0		1		0			1
-Dani 		0		1			0		1		1			1
-Zoli 		0		1			0		1		1			0
-Tamas 		0		1			1		1		0			0
-Balint 		0		1			1		1		1			1
-Krisztian 	0		1			0		1		0			0
-Karolina 	1		0			0		1		0			1
-Marika 		1		0			0		0		0			0
-;
-
-
-set utcabeliek :=
-	(Peti,Evi) (Peti,Aladar) (Evi,Aladar)
-	(Janka,Dani)
-	(Juliska,Rozi) (Juliska,Adam) (Juliska,Zoli) (Rozi, Adam) (Rozi,Zoli) (Adam,Zoli)
-	(Tamas, Balint) (Tamas, Krisztian) (Balint, Krisztian) 
-	(Karolina, Marika)
-;
 
 # Ez a megoldás az eredeti adatokkal készült (prbáltam a javasolt megoldást is, de a halmazoknál elakadtam, amikor  a gyerekeket az utcákhoz kellene rendelni)
 
